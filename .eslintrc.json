@@ -1,0 +1,65 @@
+{
+	"rules": {
+		"comma-dangle": [
+			0
+		],
+		"no-console": [
+			0
+		],
+
+		"indent": [
+			1, "tab", {
+				"SwitchCase": 1
+			}
+		],
+		"quotes": [
+			1,
+			"single"
+		],
+		"linebreak-style": [
+			1,
+			"unix"
+		],
+		"semi": [
+			1,
+			"always"
+		],
+		"no-undef": [
+			1
+		],
+
+		"brace-style": [
+			2
+		],
+		"no-unused-vars": [
+			0
+		],
+		"no-fallthrough": [
+			0
+		],
+		"eol-last": 2,
+		"no-trailing-spaces": 2,
+		"no-multiple-empty-lines": [2, {
+			"max": 2,
+			"maxEOF": 1
+		}]
+	},
+	"ecmaFeatures": {
+		"blockBindings": true
+	},
+	"env": {
+		"browser": true
+	},
+	"globals": {
+		"require": true,
+		"jQuery": true,
+		"module": true,
+
+		"describe": true,
+		"it": true,
+		"after": true,
+		"beforeEach": true,
+		"afterEach": true
+	},
+	"extends": "eslint:recommended"
+}

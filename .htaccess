@@ -1,0 +1,11 @@
+RewriteEngine on
+
+RewriteBase /
+
+RewriteRule ^rnc-webservices/apps/(.+)$ /apps/$1 [L,QSA]
+RewriteRule ^rnc-webservices/assets/(.+)$ /assets/$1 [L,QSA]
+RewriteRule ^rnc-webservices/services/(.+)$ /rnc-webservices/services/$1 [L,QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)$ index.htm [QSA]
