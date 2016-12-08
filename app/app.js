@@ -2,10 +2,8 @@ var $ = require('jquery');
 var _ = require('underscore');
 var Backbone = require('backbone');
 var Marionette = require('backbone.marionette');
-var Handlebars = require('handlebars');
 var ConfigHelper = require('helpers/config');
-var HandlebarsHelper = require('helpers/handlebars');
-var CoreHelper = require('helpers/core');
+
 
 var method;
 var noop = function() {};
@@ -81,5 +79,4 @@ if (ConfigHelper.isIPad()) {
 
 $('html').addClass(deviceClass);
 
-window.App = App;
 module.exports = App;

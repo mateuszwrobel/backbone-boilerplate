@@ -1,29 +1,33 @@
 var App = require('app');
+var Backbone = require('backbone');
 var Marionette = require('backbone.marionette');
+var $ = require('jquery');
 var HomeLayout = require('./layouts/home.hbs');
 var ApplicationHeader = require('./header');
 var ApplicationSidebar = require('./sidebar');
 var userStore = require('stores/userStore');
 
-var MainLayout = App.Vendor.LayoutView.extend({
+var entityName = require('entities/entityName');
+
+var MainLayout = Marionette.LayoutView.extend({
 	el: '#region--main',
 	template: HomeLayout,
 });
 
-var HeaderRegion = App.Vendor.Region.extend({
-	el: '#region--header'
+var HeaderRegion = Marionette.Region.extend({
+	el: '#region--header',
 });
-var SidebarRegion = App.Vendor.Region.extend({
-	el: '#region--sidebar'
+var SidebarRegion = Marionette.Region.extend({
+	el: '#region--sidebar',
 });
-var ContentRegion = App.Vendor.Region.extend({
-	el: '#region--content'
+var ContentRegion = Marionette.Region.extend({
+	el: '#region--content',
 });
-var NotificationRegion = App.Vendor.ModalRegion.extend({
-	el: '#region--notification'
+var NotificationRegion = Marionette.Region.extend({
+	el: '#region--notification',
 });
-var ModalRegion = App.Vendor.ModalRegion.extend({
-	el: '#region--modal'
+var ModalRegion = Marionette.Region.extend({
+	el: '#region--modal',
 });
 
 var Controller = {
@@ -48,38 +52,25 @@ var Controller = {
 			modalRegion: ModalRegion,
 		});
 
-		App.request('getUserDetails')
+		entityName.api.getUserDetails()
 			.done(function (userData) {
-				if (userData.status === 204) {
-					Controller.showRedirectDialog();
-				} else {
-					var user = userData.collection.at(0);
-					userStore.set(user.toJSON());
+				userStore.set(userData);
 
-					//extend system configuration
-					_.each(confData.response.data.records[0], function (value, key) {
-						App.Config.setValue(key, value);
+				$.when(
+					Controller.showHeader(userStore),
+					Controller.showSidebar(userStore)
+				)
+					.done(function () {
+						App.vent.trigger('app:init:done');
+					})
+					.fail(function () {
+						App.stop();
+						App.vent.trigger('app:init:fail');
 					});
-
-					$.when(
-						Scope.Controller.showHeader(user),
-						Scope.Controller.showSidebar(user)
-					)
-						.done(function () {
-							App.vent.trigger('app:init:done');
-						})
-						.fail(function () {
-							App.stop();
-							App.vent.trigger('app:init:fail');
-						});
-				}
 			})
 			.fail(function () {
 				App.vent.trigger('app:init:fail');
 			});
-	},
-	// TODO change this dialog to new notification structure
-	showRedirectDialog: function () {
 	},
 
 	showHeader: function (userModel) {
@@ -89,7 +80,7 @@ var Controller = {
 			deferred.resolve();
 		});
 
-		App.headerRegion.show(ApplicationHeader.Controller.getView(userModel));
+		App.headerRegion.show(ApplicationHeader.getView(userModel));
 
 		return deferred.promise();
 
@@ -104,7 +95,7 @@ var Controller = {
 			deferred.resolve();
 		});
 
-		App.sidebarRegion.show(ApplicationSidebar.Controller.getView(userModel));
+		App.sidebarRegion.show(ApplicationSidebar.getView(userModel));
 
 		return deferred.promise();
 	}

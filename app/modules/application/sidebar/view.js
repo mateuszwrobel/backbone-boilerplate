@@ -1,3 +1,4 @@
+var App = require('app');
 var Marionette = require('backbone.marionette');
 var template = require('./template.hbs');
 

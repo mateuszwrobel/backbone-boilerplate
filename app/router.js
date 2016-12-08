@@ -1,8 +1,8 @@
-var App = require('app');
 var Backbone = require('backbone');
 var Marionette = require('backbone.marionette');
 var $ = require('jquery');
 var _ = require('underscore');
+var App = require('app');
 
 // import screen controllers
 var exampleScreen = require('screens/exampleScreen');
@@ -10,7 +10,7 @@ var exampleScreen = require('screens/exampleScreen');
 var RouteHits = 0;
 var RouterInstance = {};
 
-var Router = Backbone.Marionette.AppRouter.extend({
+var Router = Marionette.AppRouter.extend({
 
 	appRoutes: {
 		'': 'showIndex',
@@ -31,15 +31,6 @@ var Controller = {
 		// do addiotional work on this path (update sidebars/headers/whatever)
 		App.startComponent(exampleScreen);
 		exampleScreen.showIndex();
-	},
-
-	showTasks: function(tab) {
-		console.log('AppController:showTasks');
-		App.startComponent(Tasks.moduleName, tab);
-		Tasks.Controller.showList(tab);
-		var name = 'tasks';
-		name += tab ? '/' + tab : '';
-		App.vent.trigger('sidebar:activate', name);
 	},
 };
 

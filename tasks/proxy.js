@@ -12,7 +12,7 @@ var config = {
 /**
  * 'gulp serve --mock' for running mock proxy
  */
-gulp.task('serve', function() {
+gulp.task('provide:proxy', function() {
 	// var mock = argv.mock || false;
 	gulp.src('./')
 		.pipe(webserver({

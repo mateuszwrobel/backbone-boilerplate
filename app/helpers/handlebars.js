@@ -1,5 +1,6 @@
 var Handlebars = require('handlebars/runtime')['default'];
 var ClientHandlebars = require('handlebars');
+var App = require('app');
 
 //  you can assign helpers explicitly to one type of compilation
 // runtime is used for precompilation

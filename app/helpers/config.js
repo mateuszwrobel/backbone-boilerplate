@@ -1,33 +1,39 @@
-var configJson = require('config/server');
-var notificationsJson = require('config/notifications');
+var configJson = require('config/general');
 
-// var configJson = JSON.parse(configFile);
-// var notificationsJson = JSON.parse(notificationsFile);
 var documentDateFormat = 'DD-MMM-YYYY';
 
 module.exports = {
 
-	isMAC: function() {
+	isMAC: function () {
 		return navigator.userAgent.match(/Mac/i);
 	},
 
-	isSafari: function() {
+	isSafari: function () {
 		return navigator.userAgent.match(/Safari/i) && navigator.vendor.match(/Apple Computer/i);
 	},
 
-	isChrome: function() {
+	isChrome: function () {
 		return window.chrome;
 	},
 
-	isIPhone: function() {
+	isIPhone: function () {
 		return navigator.userAgent.match(/iPhone/i);
 	},
 
-	isIPad: function() {
+	isIPad: function () {
 		return (navigator.userAgent.match(/iPad/i));
 	},
 
-	isIPod: function() {
+	isIPod: function () {
 		return (navigator.userAgent.match(/iPod/i));
 	},
+
+	getValue: function (key) {
+		return configJson[key];
+	},
+
+	setValue: function (key, value) {
+		configJson[key] = value;
+	},
+
 };

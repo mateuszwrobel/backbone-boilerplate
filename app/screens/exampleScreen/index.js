@@ -1,4 +1,5 @@
 var Marionette = require('backbone.marionette');
+var App = require('app');
 var View = require('./view.js');
 
 var Controller = {
@@ -8,6 +9,7 @@ var Controller = {
 
 	showIndex: function() {
 		// do some logic and
+		App.getRegion('contentRegion').show(new View());
 	},
 
 	destroy: function() {
@@ -18,6 +20,6 @@ var Controller = {
 
 // marionette object have some methods predefined
 // also extends Backbone.Events object
-var MarionetteController = Marionette.Object({});
+var MarionetteController = Marionette.Object.extend({});
 
 module.exports = Controller;

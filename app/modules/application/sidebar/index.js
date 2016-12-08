@@ -1,24 +1,24 @@
 var App = require('app');
 var View = require('./view');
 
-	var Controller = {
+var Controller = {
 
-		init: function() {
-			console.log('sidebar start');
-			this.view = new View();
-		},
+	init: function () {
+		console.log('sidebar start');
+		this.view = new View();
+	},
 
-		getView: function(userModel) {
+	getView: function (userModel) {
 
-			var dataModel = {
-				UiAppVersion: window.UiVersion,
-			};
+		var dataModel = {
+			UiAppVersion: window.UiVersion,
+		};
 
-			this.view.model = dataModel;
-			return this.view;
-		},
+		this.view.model = dataModel;
+		return this.view;
+	},
 
-	};
+};
 
 
-module.exports = App.module('Modules.Application.Sidebar');
+module.exports = Controller;

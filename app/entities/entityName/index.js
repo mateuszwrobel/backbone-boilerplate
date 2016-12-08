@@ -1,6 +1,7 @@
 var App = require('app');
 var Backbone = require('backbone');
 
+var http = require('vendors/http');
 // concrete model
 var Model = Backbone.Model.extend();
 
@@ -13,23 +14,32 @@ var Collection = Backbone.Collection.extend({
 
 
 // keep it simple, so if you want unit test it
-var Api = {
+var api = {
 	getSomething: function (options) {
 		var data = {
 			some: 'properties',
 		};
 
-		return $.post('path/to/sth', data);
+		return http.jsonPayloadAjax({
+			url:'path/to/sth',
+			data: data
+		});
 	},
 
 	getCollectionBackboneWay: function(options) {
 		return Collection.fetch();
 	},
+
+	getUserDetails: function() {
+		return http.jsonAjax({
+			url: 'userDetails',
+		});
+	}
 };
 
 // if you separate modules into chunks events may be better solution
 App.reqres.setHandler('getSomething', function (options) {
-	return Api.getSomething(options);
+	return api.getSomething(options);
 });
 
 // if you want to create some caching system to let
@@ -40,6 +50,6 @@ var store = {};
 module.exports = {
 	Model: Model,
 	Collection: Collection,
-	Api: Api,
+	api: api,
 	store: store
 };

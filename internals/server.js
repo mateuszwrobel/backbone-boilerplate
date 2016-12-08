@@ -7,14 +7,19 @@ var hostname = process.env.HOSTNAME || 'localhost';
 var port = parseInt(process.env.PORT, 10) || 8080;
 var mockDir = __dirname + '/mocks/';
 
+app.use(express.static(__dirname + '/../assets/public'));
 app.use(bodyParser.json()); // for parsing application/json
 app.all('/', function(req, res) {
-	res.send(fs.readFileSync(mockDir + 'testws.html', 'utf8'));
+	res.send(fs.readFileSync(__dirname+'/../index.htm', 'utf8'));
 });
 
 app.all('/api/mocked/data', function(req, res) {
 	res.json(JSON.parse(fs.readFileSync(mockDir + 'mock.json', 'utf8')));
 });
+
+app.get('/userDetails', function(req, res){
+	res.json(JSON.parse(fs.readFileSync(mockDir + 'userDetails.json', 'utf8')));
+})
 
 var server = app.listen(port, hostname, function() {
 	var _host = server.address().address;
