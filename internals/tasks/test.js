@@ -14,7 +14,7 @@ var config = {
 	appDir: 'app',
 	publicDir: 'test/bundle/js',
 	isDevelopment: true,
-	testDir: 'test/**/*Spec.js',
+	testDir: 'app/**/*.test.js',
 };
 
 const entryPoint = './' + config.appDir + '/index.js';
@@ -63,29 +63,16 @@ var unitTests = function(reportToFile) {
  * to watch single file use property --file FILE_NAME
  */
 var UTest = function() {
-	//var reporter = 'spec';
-	var reporter = 'list';
-	var outputStream;
 	var file = argv.file;
+	var reporter = 'list';
 	var opts = {
 		'browserify-options': browserifyOptions,
 		watch: true,
 		reporter: reporter,
-		output: outputStream,
-		//debug: true,
-		consolify: 'test-reports/output.html',
 	};
-	gulp.src('./' + config.testReportDir)
-		.pipe(webserver({
-			livereload: true,
-			directoryListing: false,
-			port: 3030,
-			open: true,
-			fallback: 'output.html'
-		}));
 
 	if (file) {
-		return mochify('./test/**/' + file + '.Spec.js', opts)
+		return mochify('./test/**/' + file + '.test.js', opts)
 			.bundle();
 	} else {
 		return mochify('./' + config.testDir, opts)
