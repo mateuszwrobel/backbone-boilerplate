@@ -3,8 +3,8 @@ var fs = require('fs');
 var bodyParser = require('body-parser');
 
 var app = express();
-var hostname = process.env.HOSTNAME || 'localhost';
-var port = parseInt(process.env.PORT, 10) || 8080;
+var hostname = 'localhost';
+var port = 9000;
 var mockDir = __dirname + '/mocks/';
 
 app.use(express.static(__dirname + '/../assets/public'));

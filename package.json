@@ -6,14 +6,15 @@
 	"test": "test"
   },
   "scripts": {
-	"build:prod": "gulp --gulpfile ./tasks/prod.js --cwd ./ prod",
-	"fix-code": "gulp --gulpfile ./tasks/test.js --cwd ./ lint-dev --fix",
-	"provide:mock": "node internals/server.js",
-	"provide:proxy": "gulp --gulpfile ./tasks/proxy.js --cwd ./ provide:proxy",
-	"test:console-report": "gulp --gulpfile ./tasks/test.js --cwd ./ test-dev",
-	"test:file-report": "gulp --gulpfile ./tasks/test.js --cwd ./ test",
-	"watchc:dev": "gulp --gulpfile ./tasks/dev.js --cwd ./ dev",
-	"watch:tests": "gulp --gulpfile ./tasks/test.js --cwd ./ test-watch"
+	"build:prod": "gulp --gulpfile ./internals/tasks/prod.js --cwd ./ prod",
+	"fix-code": "gulp --gulpfile ./internals/tasks/test.js --cwd ./ lint-dev --fix",
+	"serve:mock": "node internals/server.js",
+	"proxy": "gulp --gulpfile ./internals/tasks/proxy.js --cwd ./ proxy",
+	"proxy:mock": "npm run proxy -- --mock",
+	"test:console-report": "gulp --gulpfile ./internals/tasks/test.js --cwd ./ test-dev",
+	"test:file-report": "gulp --gulpfile ./internals/tasks/test.js --cwd ./ test",
+	"watch:dev": "gulp --gulpfile ./internals/tasks/dev.js --cwd ./ dev",
+	"watch:tests": "gulp --gulpfile ./internals/tasks/test.js --cwd ./ test-watch"
   },
   "browser": {},
   "browserify-shim": {},
